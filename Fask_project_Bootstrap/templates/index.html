@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Web Core</title>
+</head>
+
+<body>
+    {% extends 'base.html' %}
+    {% block header_nav %}
+    <div class="container my-3">
+        <form action="/" method="POST">
+            <div class="mb-3">
+                <label for="title" class="form-label">Todo Title</label>
+                <input type="text" class="form-control" name="title" id="title" required>
+            </div>
+            <div class="mb-3">
+                <label for="desc" class="form-label">Todo Description</label>
+                <input type="text" class="form-control" name="desc" id="desc" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <div class="container my-3">
+        <h2>Your Data</h2>
+        <table class="table">
+            <tbody>
+                {% if allTodos|length == 0 %}
+                <div class="alert alert-dark my-5" role="alert">
+                    <p>No records found. Add your first todo.</p>
+                </div>
+                {% else %}
+                <thead>
+                    <tr>
+                        <th scope="col">SNo</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                {% for Todo in allTodos %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ Todo.title }}</td>
+                    <td>{{ Todo.desc }}</td>
+                    <td>{{ Todo.data_created }}</td>
+                    <td>
+                        <a href="/update/{{ Todo.sno }}">
+                            <button type="button" class="btn btn-dark btn-sm mx-1">Update</button>
+                        </a>
+                        <a href="/delete/{{ Todo.sno }}">
+                            <button type="button" class="btn btn-dark btn-sm mx-1">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

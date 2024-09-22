@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Update Todo</title>
+</head>
+
+<body>
+    {% extends 'base.html' %}
+    {% block header_nav %}
+    <div class="container my-3">
+        <h2>Update Todo</h2>
+        <form action="/update/{{todo.sno}}" method="POST">
+            <div class="mb-3">
+                <label for="title" class="form-label">Todo Title</label>
+                <input type="text" class="form-control" name="title" id="title" value="{{ todo.title }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="desc" class="form-label">Todo Description</label>
+                <input type="text" class="form-control" name="desc" id="desc" value="{{ todo.desc }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+    {% endblock %}
+</body>
+
+</html>
